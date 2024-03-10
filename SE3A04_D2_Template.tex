@@ -66,26 +66,39 @@
 \label{sec:introduction}
 % Begin Section
 
-This section should provide an brief overview of the entire document.
 
 \subsection{Purpose}
 \label{sub:purpose}
 % Begin SubSection
-State the purpose and intended audience for the document.
+This document provides a description of the architectural design decisions of the Secure Chat internal messaging application. Included are analysis class diagrams for the messaging and database systems that make up the functionality of the application. 
+
+This document is intended for internal stakeholders, including but not limited to, project managers, developers, domain experts, and team members/investors. Deliverable 1 should be read prior, and technical knowledge may be beneficial in better understanding the contents of the document. 
 % End SubSection
 
 \subsection{System Description}
 \label{sub:system_description}
 % Begin SubSection
-Give a brief description of the system. This could be a paragraph or two to give some context to this document.
-
+Secure Chat is an Android-based internal messaging application made for workplace communication on company-issued devices, operates on a client-server architecture for efficient division into client and server components, enabling scalability. Additionally, it adopts a repository-style architecture, ensuring the distinct separation of database logic from the overall application structure.
 % End SubSection
 
 \subsection{Overview}
 \label{sub:overview}
 % Begin SubSection
-Describe what the rest of the document contains and explain how the document is organised (e.g. "In Section 2 we discuss...in Section 3...").
+\indent \par
+Section 1: Introduction and Context
+This section serves as an introductory overview, providing essential context for the subsequent sections of the document.
 
+Section 2: Analysis Class Diagram
+In Section 2, an in-depth analysis class diagram is presented, offering a visual representation of the various classes within the application and the intricate relationships existing among them.
+
+Section 3: Architectural Design
+Section 3 delves into the architectural design chosen for our system, elucidating the strategic division of subsystems to ensure a cohesive and efficient structure.
+
+Section 4: Class Responsibilities - CRC Cards
+Section 4 systematically assigns CRC (Class-Responsibility-Collaboration) cards to each class identified in the analysis class diagram. These cards delineate the responsibilities of each class and highlight their interdependencies with other classes.
+
+Section A: Division of Labour
+Concluding the document, Section A provides a comprehensive Division of Labour, outlining the individual contributions of each team member to the creation of this document.
 % End SubSection
 
 % End Section
