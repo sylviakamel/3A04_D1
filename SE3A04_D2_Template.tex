@@ -84,20 +84,15 @@ Secure Chat is an Android-based internal messaging application made for workplac
 \subsection{Overview}
 \label{sub:overview}
 % Begin SubSection
-\indent \par
-Section 1: Introduction and Context
-This section serves as an introductory overview, providing essential context for the subsequent sections of the document.
-
-Section 2: Analysis Class Diagram
-In Section 2, an in-depth analysis class diagram is presented, offering a visual representation of the various classes within the application and the intricate relationships existing among them.
-
-Section 3: Architectural Design
-Section 3 delves into the architectural design chosen for our system, elucidating the strategic division of subsystems to ensure a cohesive and efficient structure.
-
-Section 4: Class Responsibilities - CRC Cards
-Section 4 systematically assigns CRC (Class-Responsibility-Collaboration) cards to each class identified in the analysis class diagram. These cards delineate the responsibilities of each class and highlight their interdependencies with other classes.
-
-Section A: Division of Labour
+\textbf{Section 1: Introduction and Context} \\
+This section serves as an introductory overview, providing essential context for the subsequent sections of the document. \\[12pt]
+\textbf{Section 2: Analysis Class Diagram} \\
+In Section 2, an in-depth analysis class diagram is presented, offering a visual representation of the various classes within the application and the intricate relationships existing among them.\\[12pt]
+\textbf{Section 3: Architectural Design} \\
+Section 3 delves into the architectural design chosen for our system, elucidating the strategic division of subsystems to ensure a cohesive and efficient structure.\\[12pt]
+\textbf{Section 4: Class Responsibilities - CRC Cards} \\
+Section 4 systematically assigns CRC (Class-Responsibility-Collaboration) cards to each class identified in the analysis class diagram. These cards delineate the responsibilities of each class and highlight their interdependencies with other classes.\\[12pt]
+\textbf{Section A: Division of Labour} \\
 Concluding the document, Section A provides a comprehensive Division of Labour, outlining the individual contributions of each team member to the creation of this document.
 % End SubSection
 
@@ -152,7 +147,10 @@ As for batch sequential it also doesn’t fit the criteria for this project. The
 \subsection{Subsystems}
 \label{sub:subsystems}
 % Begin SubSection
- Provide a list of your subsystems, with a brief description of each. Be sure to document its purpose and relationship to other subsystems.
+Provide a list of your subsystems, with a brief description of each. Be sure to document its purpose and relationship to other subsystems.\\[12pt]
+\textbf{Chat Manager:} This subsystem is responsible for creating, managing, and securing chats by communicating with the KDC and chat databases. It adheres to the Repository architecture style since it communicates only through the main repository in our system. It also adheres to the Pipes and Filters architecture style since messages need to go through encryption and decryption filters and they can be delivered to other users through pipes. \\[12pt]
+\textbf{Account Manager:} This subsystem is responsible for creating, editing, and deleting accounts. It communicates with the account database to edit and delete accounts and account information. The architecture style this subsystem follows is the Repository style because it communicates with the main repository to access the Account database.\\[12pt]
+\textbf{Announcement Manager:} This subsystem is responsible for creating, securing, and managing announcements. It communicates with the KDC and announcements databases to access user authentication. Since it follows the repository architecture, it communicates to these databases only through the main repository.
 
 % End SubSection
 
