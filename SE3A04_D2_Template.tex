@@ -10,6 +10,7 @@
 \usepackage{fancyhdr}
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
+\usepackage{array}
 %\usepackage{extarrows}
 %\usepackage{setspace}
 %------------------------------------------------------------------------------
@@ -65,26 +66,39 @@
 \label{sec:introduction}
 % Begin Section
 
-This section should provide an brief overview of the entire document.
 
 \subsection{Purpose}
 \label{sub:purpose}
 % Begin SubSection
-State the purpose and intended audience for the document.
+This document provides a description of the architectural design decisions of the Secure Chat internal messaging application. Included are analysis class diagrams for the messaging and database systems that make up the functionality of the application. 
+
+This document is intended for internal stakeholders, including but not limited to, project managers, developers, domain experts, and team members/investors. Deliverable 1 should be read prior, and technical knowledge may be beneficial in better understanding the contents of the document. 
 % End SubSection
 
 \subsection{System Description}
 \label{sub:system_description}
 % Begin SubSection
-Give a brief description of the system. This could be a paragraph or two to give some context to this document.
-
+Secure Chat is an Android-based internal messaging application made for workplace communication on company-issued devices, operates on a client-server architecture for efficient division into client and server components, enabling scalability. Additionally, it adopts a repository-style architecture, ensuring the distinct separation of database logic from the overall application structure.
 % End SubSection
 
 \subsection{Overview}
 \label{sub:overview}
 % Begin SubSection
-Describe what the rest of the document contains and explain how the document is organised (e.g. "In Section 2 we discuss...in Section 3...").
+\indent \par
+Section 1: Introduction and Context
+This section serves as an introductory overview, providing essential context for the subsequent sections of the document.
 
+Section 2: Analysis Class Diagram
+In Section 2, an in-depth analysis class diagram is presented, offering a visual representation of the various classes within the application and the intricate relationships existing among them.
+
+Section 3: Architectural Design
+Section 3 delves into the architectural design chosen for our system, elucidating the strategic division of subsystems to ensure a cohesive and efficient structure.
+
+Section 4: Class Responsibilities - CRC Cards
+Section 4 systematically assigns CRC (Class-Responsibility-Collaboration) cards to each class identified in the analysis class diagram. These cards delineate the responsibilities of each class and highlight their interdependencies with other classes.
+
+Section A: Division of Labour
+Concluding the document, Section A provides a comprehensive Division of Labour, outlining the individual contributions of each team member to the creation of this document.
 % End SubSection
 
 % End Section
@@ -99,19 +113,41 @@ This section should provide an analysis class diagram for your application.
 \section{Architectural Design}
 \label{sec:architectural_design}
 % Begin Section
-This section should provide an overview of the overall architectural design of your application. Your overall architecture should show the division of the system into subsystems with high cohesion and low coupling.
-
+This section will provide an overview of our architecture and the reason we chose it.
 \subsection{System Architecture}
 \label{sub:system_architecture}
-% Begin SubSection
-\begin{itemize}
-	\item Identify and explain the overall architecture of your system
-	\item Be sure to clearly state the name of the architecture you used (this is the name of the architectural pattern, not the name of your system)
-	\item Provide the reasoning and justification of the choice of architecture
-	\item Provide a structural architecture diagram showing the relationship among the subsystems (if appropriate)
-	\item List any design alternatives you considered, but eliminated (and explain why you eliminated them)
-\end{itemize}
-% End SubSection
+The SCAA uses a Data Centred Software Architecture, mainly the Repository Architecture style. The Repo is where all of the data is stored and is connected to different management subsystems which are all invoked through the user. 
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|>{\centering\arraybackslash}m{4cm}|>{\centering\arraybackslash}m{7cm}|>{\centering\arraybackslash}m{4cm}|}
+	\hline
+	\textbf{Subsystem} & \textbf{Purpose} & \textbf{Architecture Style} \\ \hline
+	Chat Manager & Create, manage and secure chats & Repository and Pipes and Filters \\ \hline
+	Account Manager & Create, edit, and delete accounts & Repository \\ \hline
+	Announcement Manager & Create, secure and manage announcements & Repository \\ \hline
+	\end{tabular}
+	\caption{Subsystem Architecture Styles}
+	\label{table:subsystem}
+\end{table}
+
+In addition four databases are present in the Repo part of the architecture, a chat database, account database, announcement database, and a KDC database. These are to ensure that everyone’s respective information and all the chat information is stored.
+\medskip
+
+For this project, we chose the repository architecture due to its perfect fit for our needs in creating a data-centred, secure chat application. This architecture style is the best option as it supports active user engagement with a more structured and passive data management approach, which is crucial for maintaining the integrity and security of communication. The repository model offers a centralised data management system that facilitates efficient data access, sharing, and updating across the application, ensuring that all interactions are consistently secure and coherent.
+\medskip
+
+Moreover, this architecture allows for a scalable and modular design, enabling easy integration of additional features or updates without disrupting the existing system. It supports concurrent access and modification of data, a critical requirement for a real-time chat application where multiple users interact simultaneously. The centralised control over data also simplifies the implementation of comprehensive security measures, including the management of encryption keys and authentication protocols, further aligning with our project's stringent security requirements.
+\medskip
+
+Additionally, for the specific task of decryption and encryption within our system, we've decided to integrate a pipe and filter architecture into its own subsystem (the Chat Management subsystem). This decision stems from the architecture's proven effectiveness in processing streams of data in real-time, offering a flexible and efficient way to handle the decryption process. This modular approach allows for seamless data flow and transformation, ensuring that decrypted messages are promptly and securely delivered, enhancing the overall performance and reliability of our secure communication solution.
+\medskip
+
+As for pipes and filters we didn’t go with this option since there are many limitations to using this for a secure chat app.The pipes and filters architecture is used for processing data through a series of transformations (filters), each performing a specific operation, connected by pipes (data channels). Pipes and Filters focus on data processing rather than centralised data management, potentially complicating the enforcement of security policies across multiple stages. Real-time, stateful interactions required for a chat system are not the primary focus of this architecture, making it less suitable as the core architecture for the application.
+\medskip
+
+As for batch sequential it also doesn’t fit the criteria for this project. The way batch sequential works is it takes data in batches through a sequence of steps, each step completing before the next begins. As for this app it requires real-time communication and demands immediate processing, which doesn’t align well with the batch processing nature of this architecture. Adapting batch sequential processing to the dynamic, interactive requirements of a secure chat application can be challenging.
+
 
 \subsection{Subsystems}
 \label{sub:subsystems}
